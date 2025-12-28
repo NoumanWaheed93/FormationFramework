@@ -1,6 +1,6 @@
 {
   "name": "com.artisangames.formationsystem",
-  "version": "1.0.1", 
+  "version": "1.0.2", 
   "displayName": "Formation System",
   "description": "This is a formation system package made by Nouman Waheed",
   "unity": "2019.1",
@@ -16,6 +16,7 @@
   },
 "testables": ["com.artisangames.formationsystem.tests"]
 }
+
 
 
 
