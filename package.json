@@ -1,0 +1,18 @@
+{
+  "name": "com.artisangames.formationsystem",
+  "version": "1.0.0", 
+  "displayName": "Formation System",
+  "description": "This is a formation system package made by Nouman Waheed",
+  "unity": "2019.1",
+  "dependencies": {},
+ "keywords": [
+    "formation",
+    "team formation",
+    "squad formation"
+  ],
+  "author": {
+    "name": "Nouman Waheed",
+    "email": "nouman1993@live.com"
+  }
+}
+
