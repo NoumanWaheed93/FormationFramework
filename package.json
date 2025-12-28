@@ -13,7 +13,9 @@
   "author": {
     "name": "Nouman Waheed",
     "email": "nouman1993@live.com"
-  }
+  },
+"testables": ["com.artisangames.formationsystem.tests"]
 }
+
 
 
