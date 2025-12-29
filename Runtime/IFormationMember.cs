@@ -1,5 +1,4 @@
 using UnityEngine;
-using Common;
 
 namespace FormationSystem
 {
@@ -13,7 +12,7 @@ namespace FormationSystem
 
         public Vector3 angularVelocity { get; }
 
-        public IRelativePositionProvider Transform { get; }
+        public Transform Transform { get; }
 
         public Formation Formation { get; set; }
     }

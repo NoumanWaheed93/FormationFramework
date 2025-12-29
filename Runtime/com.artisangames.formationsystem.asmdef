@@ -1,9 +1,7 @@
 {
     "name": "com.artisangames.formationsystem",
     "rootNamespace": "FormationSystem",
-    "references": [
-        "GUID:6011dc511b9c287468b167eba0106732"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
