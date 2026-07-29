@@ -38,6 +38,21 @@ public abstract class FormationTests
         Assert.AreEqual(member.PositionIndex, 0);
     }
 
+    //The two tests above only re-add a lone member, where Count-1 happens to be the index it
+    //already had. The bug only shows up once a second member owns the slot Count-1 points at.
+    [Test]
+    public void Re_Adding_A_Member_Does_Not_Steal_Another_Members_Position_Index()
+    {
+        CreateAFormation(2);
+
+        formation.AddMember(formationMembers[0]);
+
+        Assert.AreEqual(2, formation.MemberCount, "Re-adding a member changed the member count");
+        Assert.AreEqual(0, formationMembers[0].PositionIndex, "Re-added member lost its own index");
+        Assert.AreEqual(1, formationMembers[1].PositionIndex, "Re-adding a member stole another member's index");
+        Assert.AreEqual(formationMembers[0], formation.leader, "Re-adding a member changed the leader");
+    }
+
     [Test]
     public virtual void Members_Get_Correct_PositionIndex_After_Adding_In_Formation()
     {

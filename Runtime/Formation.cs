@@ -19,9 +19,13 @@ namespace FormationSystem
 
         public virtual void AddMember(T member)
         {
-            //Add the member's position index before adding the member in the list. 
+            //Bail out if the member is already in the formation. Otherwise the lines below would
+            //reassign its positionIndex to a slot another member already holds.
+            if (!members.Add(member))
+                return;
+
+            //Add the member's position index before adding the member in the list.
             //Because, this member's positionIndex is equal to Count before adding the new member
-            members.Add(member);
             member.PositionIndex = members.Count-1;
             TryResetLeader(member);
             member.Position = GetMemberPosition(member.PositionIndex);

@@ -26,6 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `AddMember` now sets the member's `Formation` back-reference, which was previously left `null`.
+- `AddMember` no longer corrupts `PositionIndex` when handed a member the formation already contains.
+  `members` is a `HashSet<T>`, so the add was a no-op, but the following lines still reassigned the
+  member's index to `MemberCount - 1` — a slot another member already owned. Adding A, then B, then A
+  again left both A and B claiming index 1 while `leader` still pointed at A, so the next
+  `RemoveMember` reshuffled off corrupt indices. The two existing duplicate-add tests only re-added a
+  lone member, where `MemberCount - 1` happened to be the index it already had, so they never caught
+  it; `Re_Adding_A_Member_Does_Not_Steal_Another_Members_Position_Index` now covers it for all four
+  formations.
 - Removing the last member of a formation now clears `leader` to `default(T)`. Previously it kept
   pointing at the removed member, and `BalancedFormation.RemoveMember` could dereference a `null` flank
   member while rebalancing an empty formation.
