@@ -6,20 +6,26 @@ namespace FormationSystem
      * Balanced Formation is a type of formation that keeps it's leader at the center and 
      * the both sides left and right are symmetrical
      */
-    public abstract class BalancedFormation : Formation
+    public abstract class BalancedFormation<T> : Formation<T> where T: IFormationMember<T>
     {
-        public override void RemoveMember(IFormationMember memberToRemove)
+        public override void RemoveMember(T memberToRemove)
         {
             int removedMemberIndex = memberToRemove.PositionIndex;
             bool isRemovedMemberIndexEven = removedMemberIndex % 2 == 0;
             members.Remove(memberToRemove);
 
+            if (members.Count == 0)
+            {
+                leader = default(T);
+                return;
+            }
+
             int evenMemberCount = 0;
             int oddMemberCount = 0;
-            IFormationMember memberWithGreatestEvenIndex = null;
-            IFormationMember memberWithGreatestOddIndex = null;
+            T memberWithGreatestEvenIndex = default(T);
+            T memberWithGreatestOddIndex = default(T);
 
-            foreach (IFormationMember member in members)
+            foreach (T member in members)
             {
                 bool isEven = member.PositionIndex % 2 == 0;
 
@@ -52,7 +58,7 @@ namespace FormationSystem
             EvenOutBothSides(evenMemberCount, oddMemberCount, memberWithGreatestEvenIndex, memberWithGreatestOddIndex);
         }
 
-        private IFormationMember GetMemberWithGreaterIndex(IFormationMember memberWithGreaterIndex, IFormationMember member)
+        private T GetMemberWithGreaterIndex(T memberWithGreaterIndex, T member)
         {
             if (memberWithGreaterIndex == null)
                 memberWithGreaterIndex = member;
@@ -63,7 +69,7 @@ namespace FormationSystem
         }
 
         private void EvenOutBothSides(int evenMemberCount, int oddMemberCount,
-            IFormationMember memberWithGreatestEvenIndex, IFormationMember memberWithGreatestOddIndex)
+            T memberWithGreatestEvenIndex, T memberWithGreatestOddIndex)
         {
             //If the difference between left and right side is more than 1
             if (Mathf.Abs(evenMemberCount - oddMemberCount) > 1)

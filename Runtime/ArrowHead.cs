@@ -7,7 +7,7 @@ namespace FormationSystem
      *     1 2  -layer 1
      *    3   4 -layer 2
      */
-    public class ArrowHead : BalancedFormation
+    public class ArrowHead<T> : BalancedFormation<T> where T : IFormationMember<T>
     {
         public override Vector3 GetMemberPosition(int memberIndex)
         {

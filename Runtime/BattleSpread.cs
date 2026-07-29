@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FormationSystem
 {
-    public class BattleSpread : BalancedFormation
+    public class BattleSpread<T> : BalancedFormation<T> where T : IFormationMember<T>
     {
         public override Vector3 GetMemberPosition(int memberIndex)
         {

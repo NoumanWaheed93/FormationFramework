@@ -2,18 +2,16 @@ using UnityEngine;
 
 namespace FormationSystem
 {
-    public interface IFormationMember
+    public interface IFormationMember<T> where T : IFormationMember<T>
     {
+        public T Self { get; }
+
         public int PositionIndex { get; set; }// position_0(leader).....
 
         public Vector3 Position { get; set; } //The relative position to formation leader.
 
-        public Vector3 velocity { get; }
+        public Formation<T> Formation { get; set; }
 
-        public Vector3 angularVelocity { get; }
-
-        public Transform Transform { get; }
-
-        public Formation Formation { get; set; }
     }
+
 }

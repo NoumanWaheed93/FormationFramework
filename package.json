@@ -1,20 +1,35 @@
 {
   "name": "com.artisangames.formationsystem",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "displayName": "Formation System",
-  "description": "This is a formation system package made by Nouman Waheed",
-  "unity": "2019.1",
+  "description": "Index-based formation positioning for squads, wings and groups. Provides Trail, Echelon, ArrowHead and BattleSpread layouts on top of a generic, engine-agnostic core that keeps positions stable as members join and leave. Pure C# logic with no MonoBehaviour requirement, so it is fully unit testable.",
+  "unity": "2021.3",
+  "license": "MIT",
   "dependencies": {
-    "net.tnrd.nsubstitute": "https://github.com/Thundernerd/Unity3D-NSubstitute.git",
-    "com.unity.test-framework": "1.1.31"
+    "com.unity.test-framework": "1.1.33"
   },
   "keywords": [
     "formation",
+    "formations",
     "team formation",
-    "squad formation"
+    "squad formation",
+    "ai",
+    "steering",
+    "flocking"
   ],
   "author": {
     "name": "Nouman Waheed",
-    "email": "nouman1993@live.com"
-  }
+    "email": "nouman1993@live.com",
+    "url": "https://github.com/NoumanWaheed93"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NoumanWaheed93/FormationFramework.git"
+  },
+  "documentationUrl": "https://github.com/NoumanWaheed93/FormationFramework#readme",
+  "changelogUrl": "https://github.com/NoumanWaheed93/FormationFramework/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/NoumanWaheed93/FormationFramework/blob/main/LICENSE.md",
+  "testables": [
+    "com.artisangames.formationsystem"
+  ]
 }

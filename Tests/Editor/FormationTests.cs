@@ -1,17 +1,28 @@
 using FormationSystem;
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class FormationTests
 {
-    protected Formation formation;
-    protected List<IFormationMember> formationMembers;
+    protected class TestFormationMember : IFormationMember<TestFormationMember>
+    {
+        public TestFormationMember Self => this;
+
+        public int PositionIndex { get; set; }
+        public Vector3 Position { get; set; }
+        public Formation<TestFormationMember> Formation { get; set; }
+
+    }
+
+    protected Formation<TestFormationMember> formation;
+    protected List<TestFormationMember> formationMembers;
 
     [Test]
     public void Member_Cannot_Be_Added_Twice()
     {
         CreateAFormation(0);
-        IFormationMember member = NSubstitute.Substitute.For<IFormationMember>();
+        TestFormationMember member = new TestFormationMember();
         formation.AddMember(member);
         formation.AddMember(member);
         Assert.AreEqual(1, formation.MemberCount);
@@ -20,8 +31,8 @@ public abstract class FormationTests
     [Test]
     public void Adding_Member_Twice_Does_Not_Change_Member_Position_Index()
     {
-        Formation formation = new Trail();
-        IFormationMember member = NSubstitute.Substitute.For<IFormationMember>();
+        Formation<TestFormationMember> formation = new Trail<TestFormationMember>();
+        TestFormationMember member = new TestFormationMember();
         formation.AddMember(member);
         formation.AddMember(member);
         Assert.AreEqual(member.PositionIndex, 0);
@@ -44,10 +55,10 @@ public abstract class FormationTests
 
         formation.RemoveMember(formationMembers[1]);
         int[] indexesAfterRemovingAt1 = { 0, 2, 3, 4, 5, 6, 7, 8, 9 };
-        FormationTestsUtility.Are_Indexes_At_The_Correct_Position(indexesAfterRemovingAt1, formationMembers);
+        Are_Indexes_At_The_Correct_Position(indexesAfterRemovingAt1, formationMembers);
         formation.RemoveMember(formationMembers[9]);
         int[] indexesAfterRemovingAt9 = { 0, 2, 3, 4, 5, 6, 7, 8 };
-        FormationTestsUtility.Are_Indexes_At_The_Correct_Position(indexesAfterRemovingAt9, formationMembers);
+        Are_Indexes_At_The_Correct_Position(indexesAfterRemovingAt9, formationMembers);
     }
 
     [Test]
@@ -58,8 +69,20 @@ public abstract class FormationTests
         formation.RemoveMember(formationMembers[0]);
         int[] newIndexes = { 1, 2, 3, 4, 5 };
         Assert.AreEqual(formationMembers[1], formation.leader);
-        FormationTestsUtility.Are_Indexes_At_The_Correct_Position(newIndexes, formationMembers);
+        Are_Indexes_At_The_Correct_Position(newIndexes, formationMembers);
+    }
+
+
+    protected static void Are_Indexes_At_The_Correct_Position(int[] newIndexes, List<TestFormationMember> formationMembers)
+    {
+        for (int i = 0; i < newIndexes.Length; i++)
+        {
+            Assert.AreEqual(i, formationMembers[newIndexes[i]].PositionIndex,
+                "Member " + newIndexes[i] + " not at Correct position ");
+        }
     }
 
     protected abstract void CreateAFormation(int count);
+
+
 }

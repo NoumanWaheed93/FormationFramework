@@ -8,7 +8,7 @@ public class BattleSpreadTests : BalancedFormationTests
     [Test]
     public void BattleSpread_Formation_Gives_Correct_Position()
     {
-        BattleSpread battleSpread = new BattleSpread();
+        BattleSpread<TestFormationMember> battleSpread = new BattleSpread<TestFormationMember>();
         Assert.AreEqual(Vector3.zero, battleSpread.GetMemberPosition(0), "zero index position does not give zero Vector");
         Assert.AreEqual(new Vector3(1, -1, 0), battleSpread.GetMemberPosition(1), "index 1 position does not give correct position");
         Assert.AreEqual(new Vector3(-1, -1, 0), battleSpread.GetMemberPosition(2), "index 2 position does not give correct position");
@@ -18,11 +18,11 @@ public class BattleSpreadTests : BalancedFormationTests
 
     protected override void CreateAFormation(int count)
     {
-        formation = new BattleSpread();
-        formationMembers = new List<IFormationMember>();
+        formation = new BattleSpread<TestFormationMember>();
+        formationMembers = new List<TestFormationMember>();
         for (int i = 0; i < count; i++)
         {
-            formationMembers.Add(NSubstitute.Substitute.For<IFormationMember>());
+            formationMembers.Add(new TestFormationMember());
             formation.AddMember(formationMembers[i]);
         }
     }

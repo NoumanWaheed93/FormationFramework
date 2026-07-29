@@ -1,11 +1,10 @@
 {
-    "name": "com.artisangames.formationsystem.tests",
+    "name": "FormationSystem.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "com.artisangames.formationsystem",
-        "TNRD.NSubstitute"
+        "FormationSystem"
     ],
     "includePlatforms": [
         "Editor"

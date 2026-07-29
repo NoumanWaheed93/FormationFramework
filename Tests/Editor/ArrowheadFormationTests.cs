@@ -9,7 +9,7 @@ public class ArrowheadFormationTests : BalancedFormationTests
     [Test]
     public void Arrow_Head_Formation_Gives_Correct_Position()
     {
-        ArrowHead arrowHeadFormation = new ArrowHead();
+        ArrowHead<TestFormationMember> arrowHeadFormation = new ArrowHead<TestFormationMember>();
         Assert.AreEqual(Vector3.zero, arrowHeadFormation.GetMemberPosition(0), "zero index position does not give zero Vector");
         Assert.AreEqual(new Vector3(0.707f, -1, -0.707f), arrowHeadFormation.GetMemberPosition(1), "index 1 position does not give correct position");
         Assert.AreEqual(new Vector3(-0.707f, -1, -0.707f), arrowHeadFormation.GetMemberPosition(2), "index 2 position does not give correct position");
@@ -18,11 +18,11 @@ public class ArrowheadFormationTests : BalancedFormationTests
     }
     protected override void CreateAFormation(int count)
     {
-        formation = new ArrowHead();
-        formationMembers = new List<IFormationMember>();
+        formation = new ArrowHead<TestFormationMember>();
+        formationMembers = new List<TestFormationMember>();
         for (int i = 0; i < count; i++)
         {
-            formationMembers.Add(NSubstitute.Substitute.For<IFormationMember>());
+            formationMembers.Add(new TestFormationMember());
             formation.AddMember(formationMembers[i]);
         }
     }
